@@ -10,13 +10,13 @@ module LiveQuery
     def receive(n=nil)
       @notifications_server.receive(n) do |payload|
         id = payload.to_i
-        yield operation_by_id(id)
+        yield operation_from_id(id)
       end
     end
 
   private
 
-    def operation_by_id(id)
+    def operation_from_id(id)
       @conn.exec("SELECT * FROM live_query_log WHERE id = #{id} LIMIT 1") do |result|
         raise 'Cannot find operation' if result.ntuples < 1
 
