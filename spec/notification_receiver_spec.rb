@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe LiveQuery::NotificationReceiver do
+describe LiveQuery::NotificationsServer do
 
   let(:conn_send) { LiveQuery::Fixtures.create_connection }
 
   let(:conn_rec) { LiveQuery::Fixtures.create_connection }
-  let(:notification_receiver) { LiveQuery::NotificationReceiver.new(conn_rec) }
+  let(:notification_receiver) { LiveQuery::NotificationsServer.new(conn_rec) }
 
   describe '#run' do
 

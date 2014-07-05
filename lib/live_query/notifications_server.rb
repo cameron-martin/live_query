@@ -1,5 +1,5 @@
 module LiveQuery
-  class NotificationReceiver
+  class NotificationsServer
 
     def initialize(connection)
       @connection = connection

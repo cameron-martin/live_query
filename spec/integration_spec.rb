@@ -8,7 +8,7 @@ describe 'Integration' do
   let(:fixtures) { LiveQuery::Fixtures.new(conn_send) }
 
   let(:conn_rec) { LiveQuery::Fixtures.create_connection }
-  let(:notification_receiver) { LiveQuery::NotificationReceiver.new(conn_rec) }
+  let(:notification_receiver) { LiveQuery::NotificationsServer.new(conn_rec) }
 
   before(:each) do
     fixtures.create_table(:test_table, ['col varchar'])
