@@ -1,6 +1,8 @@
 # LiveQuery
 
-Provides live database queries
+Library to fire events when your data changes. This is useful when wanting to, for example, update your UI in real-time.
+
+This is a very early prototype, and currently only supports postgres. It uses postgres triggers and notifications.
 
 ## Installation
 
@@ -18,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+### How it should work in the future
+
 ```ruby
 result_set = LiveQuery.execute('SELECT * FROM products') do |events|
   events.add do |row|
@@ -33,6 +37,26 @@ result_set = LiveQuery.execute('SELECT * FROM products') do |events|
   end
 end
 ```
+
+### How it works now
+
+This is where I'm at so far
+
+```ruby
+
+conn = PG.connect( ... )
+
+migration = LiveQuery::Migration.new(conn)
+migration.up # Migrate database, adding triggers to all tables, and creating a live_query_log table
+migration.down # Undo all changes made to the database by LiveQuery, including dropping the live_query_log table
+
+
+LiveQuery::ChangesServer.new(conn) do |operation|
+  # Yields Operation objects.
+end
+
+```
+
 
 ## Contributing
 
