@@ -7,7 +7,7 @@ describe LiveQuery::NotificationsServer do
   let(:conn_rec) { LiveQuery::Fixtures.create_connection }
   let(:notification_receiver) { LiveQuery::NotificationsServer.new(conn_rec) }
 
-  describe '#run' do
+  describe '#receive' do
 
     it 'returns payload after being notified' do
 
