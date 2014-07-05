@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = LiveQuery::VERSION
   spec.authors       = ['Cameron Martin']
   spec.email         = ['cameronmartin123@gmail.com']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = 'Fire events when your data changes.'
+  spec.description   = 'Library to fire events when your data changes.'
   spec.homepage      = ''
   spec.license       = 'MIT'
 
