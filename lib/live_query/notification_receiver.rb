@@ -34,7 +34,5 @@ module LiveQuery
       end
     end
 
-
-
   end
 end
