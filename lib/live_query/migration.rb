@@ -38,10 +38,8 @@ module LiveQuery
               RETURN NEW;
             END IF;
 
-
           END;
         $$ LANGUAGE plpgsql;
-
       SQL
     end
 
@@ -68,14 +66,12 @@ module LiveQuery
     end
 
     def create_triggers(*tables)
-
       tables.each do |table|
         @connection.exec <<-SQL
           CREATE TRIGGER live_query_#{table}_trigger AFTER INSERT OR UPDATE OR DELETE ON #{table}
           FOR EACH ROW EXECUTE PROCEDURE live_query_logger();
         SQL
       end
-
     end
 
     def remove_triggers(*tables)
@@ -93,11 +89,10 @@ module LiveQuery
     end
 
     def get_tables
-      @connection.exec("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name != 'live_query_log'") do |result|
+      @connection.exec("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name != 'live_query_log'") do |result|
         result.column_values(0)
       end
     end
-
 
   end
 end

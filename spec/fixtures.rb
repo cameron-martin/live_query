@@ -12,14 +12,12 @@ module LiveQuery
     end
 
     def rollback
-
       begin
         @conn.transaction do |_|
           yield
           raise Rollback
         end
       rescue Rollback; end
-
     end
 
     def create_table(name, fields=['col varchar'])
@@ -27,8 +25,8 @@ module LiveQuery
     end
 
     def insert(table_name, relation)
-      numbered_values = 1.upto(relation.count).map { |n| "$#{n}" }.join(', ')
-      @conn.exec_params("INSERT INTO #{table_name} (#{relation.keys.join(', ')}) VALUES ( #{numbered_values} ) ", relation.values)
+      placeholders = 1.upto(relation.count).map { |n| "$#{n}" }.join(', ')
+      @conn.exec_params("INSERT INTO #{table_name} (#{relation.keys.join(', ')}) VALUES ( #{placeholders} ) ", relation.values)
     end
 
     def drop_table(name)
