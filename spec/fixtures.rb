@@ -1,3 +1,5 @@
+# REVIEW: This should probably be renamed or split up into multiple classes, it does too many things.
+
 module LiveQuery
   class Fixtures
 
@@ -42,6 +44,12 @@ module LiveQuery
     def get_tables
       @conn.exec("SELECT table_name FROM information_schema.tables WHERE table_schema='public'") do |result|
         result.column_values(0)
+      end
+    end
+
+    def table_exists?(table_name)
+      @conn.exec_params("SELECT 1 FROM pg_class WHERE relname = $1", [table_name]) do |result|
+        result.ntuples > 0
       end
     end
 

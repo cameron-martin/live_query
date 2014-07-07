@@ -17,9 +17,8 @@ describe LiveQuery::Migration do
     it 'creates log table' do
       fixtures.rollback do
         migration.create_log_table
-        result = conn.exec("SELECT 1 FROM pg_class WHERE relname='live_query_log'")
 
-        expect(result.ntuples).to eq(1)
+        expect(fixtures.table_exists?(:live_query_log)).to eq(true)
       end
     end
 
