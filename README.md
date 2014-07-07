@@ -1,6 +1,6 @@
 # LiveQuery
 
-Library to fire events when your data changes. This is useful when wanting to, for example, update your UI in real-time.
+Library to fire events when your data changes. This is useful when wanting to, for example, update your UI when the data in your database changes, in real-time.
 
 This is a very early prototype, and currently only supports postgres. It uses postgres triggers and notifications.
 
@@ -52,10 +52,15 @@ migration.down # Undo all changes made to the database by LiveQuery, including d
 
 
 LiveQuery::ChangesServer.new(conn) do |operation|
-  # Yields Operation objects.
+  # Yields Operation objects, which represent insertions, deletions and updates. One per row.
 end
 
 ```
+
+## TODO
+
+* Transform the raw Operation objects into operations on subscribed SQL queries.
+* Add performance tests.
 
 
 ## Contributing
