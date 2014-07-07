@@ -61,6 +61,7 @@ end
 
 * Transform the raw Operation objects into operations on subscribed SQL queries.
 * Add performance tests.
+* Make the operation log replayable, so you can make a query and request log position in a transaction, then receive events from that point onwards.
 
 
 ## Contributing
