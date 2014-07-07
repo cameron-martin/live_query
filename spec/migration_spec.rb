@@ -18,6 +18,7 @@ describe LiveQuery::Migration do
       fixtures.rollback do
         migration.create_log_table
         result = conn.exec("SELECT 1 FROM pg_class WHERE relname='live_query_log'")
+
         expect(result.ntuples).to eq(1)
       end
     end
@@ -38,6 +39,7 @@ describe LiveQuery::Migration do
       fixtures.rollback do
         fixtures.create_table(:test_table)
         migration.create_function
+
         expect { migration.create_triggers(:test_table) }.to_not raise_error
       end
     end
@@ -47,6 +49,7 @@ describe LiveQuery::Migration do
     it 'does not raise error' do
       fixtures.rollback do
         fixtures.create_table(:test_table)
+
         expect { migration.up }.to_not raise_error
       end
     end
@@ -56,6 +59,7 @@ describe LiveQuery::Migration do
         fixtures.create_table(:test_table)
         migration.up
         migration.down
+
         expect { migration.up }.to_not raise_error
       end
     end
@@ -67,6 +71,7 @@ describe LiveQuery::Migration do
       fixtures.rollback do
         fixtures.create_table(:test_table)
         migration.up
+
         expect { migration.down }.to_not raise_error
       end
     end
@@ -81,6 +86,7 @@ describe LiveQuery::Migration do
     it 'returns tables when present' do
       fixtures.rollback do
         fixtures.create_table(:test_table)
+
         expect(migration.get_tables).to eq(['test_table'])
       end
     end
@@ -88,10 +94,10 @@ describe LiveQuery::Migration do
     it 'excludes live_query_log table' do
       fixtures.rollback do
         fixtures.create_table(:live_query_log)
+
         expect(migration.get_tables).to eq([])
       end
     end
 
   end
-
 end
