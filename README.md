@@ -1,6 +1,6 @@
 # LiveQuery
 
-Library to fire events when your data changes. This is useful when wanting to, for example, update your UI when the data in your database changes, in real-time.
+Library to fire events when your data changes. This is useful when wanting to, for example, update your UI in real-time when the data in your database changes.
 
 This is a very early prototype, and currently only supports postgres. It uses postgres triggers and notifications.
 
