@@ -37,35 +37,27 @@ describe 'Integration' do
     end
 
     operations.first
-
   end
 
   describe 'changes server' do
 
     it 'yields an insert operation when rows are inserted' do
-
       operation = receive_operation(changes_server) { fixtures.insert(:test_table, { col: 'test' }) }
 
       expect(operation).to be_a(LiveQuery::Operation::Insert)
       expect(operation.row).to eq({ col: 'test' })
-
-
     end
 
     it 'yields a delete operation when rows are deleted' do
-
       fixtures.insert(:test_table, { col: 'test' })
 
       operation = receive_operation(changes_server) { conn_send.exec("DELETE FROM test_table WHERE col='test'") }
 
       expect(operation).to be_a(LiveQuery::Operation::Delete)
       expect(operation.row).to eq({ col: 'test' })
-
-
     end
 
     it 'yields a update operation when rows are updated' do
-
       fixtures.insert(:test_table, { col: 'test' })
 
       operation = receive_operation(changes_server) { conn_send.exec("UPDATE test_table SET col='test2' WHERE col='test'") }
@@ -73,12 +65,7 @@ describe 'Integration' do
       expect(operation).to be_a(LiveQuery::Operation::Update)
       expect(operation.old_row).to eq({ col: 'test' })
       expect(operation.new_row).to eq({ col: 'test2' })
-
-
     end
 
-
-
   end
-
 end
