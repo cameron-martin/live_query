@@ -23,7 +23,7 @@ Or install it yourself as:
 ### How it should work in the future
 
 ```ruby
-result_set = LiveQuery.execute('SELECT * FROM products') do |events|
+LiveQuery.subscribe('SELECT * FROM products') do |events|
   events.add do |row|
 
   end
